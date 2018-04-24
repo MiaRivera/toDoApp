@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--config.xml reference: http://docs.phonegap.com/phonegap-build/configuring/" -->
+<widget
+	xmlns="http://www.w3.org/ns/widgets"
+	xmlns:gap="http://phonegap.com/ns/1.0"
+	id="app.it.task"
+	version="1.0"
+>
+
+	<name>Task It App</name>
+	<description>A simple to do list app for spring 2018 CSCI-N300 final project</description>
+	
+	<author>Mia Rivera</author>
+
+	<preference name="permissions" value="none"/>
+	<preference name="fullscreen" value="true"/>
+
+	<access origin="http://code.jquery.com" subdomains="true" />
+	<access />
+
+	<icon src="icon.png"/>
+</widget>
