@@ -1,0 +1,43 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>To Do App</title>
+	<link rel="stylesheet" href="/static/toDoAppCss.css" />
+	<link rel="stylesheet" href="/static/toDoRed.min.css" />
+	<link rel="stylesheet" href="/static/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+</head>
+
+<body>
+	<div data-role="page" data-theme="a">
+		<div data-role="header" data-position="inline">
+		    <div data-role="popup" id="calendarPageMenu">
+		        <ul data-role="listview" data-inset="true">
+		            <li><a href="/home" class="ui-btn" data-ajax="false">Home</a></li>
+		            <li><a href="createTask" class="ui-btn">Create a New Task</a></li>
+		            <li><a href="deleteTask" class="ui-btn">Delete a Task</a></li>
+		            <li><a href="editTask" class="ui-btn">Edit a Task</a></li>
+		            <li><a href="logout" class="ui-btn">Logout</a></li>
+		        </ul>
+		    </div>
+		    <a href="#calendarPageMenu" data-rel="popup" data-icon="grid" data-iconpos="notext"></a>
+			<h1>To Do App</h1>
+		</div>
+
+		<div>
+			<h2 id="h2" style="border-bottom: 2px solid black;padding-left: .5em">Calendar</h2>
+		</div>
+
+        <div>
+            <form id="datePicker" action="/changeDate" method='post' data-ajax="false">
+                <input name="date" type="date">
+		        <button class="ui-btn ui-corner-all" type="submit">Submit</button>
+		    </form>
+        </div>
+	</div>
+</body>
+</html>

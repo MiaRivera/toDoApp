@@ -1,0 +1,85 @@
+<%
+import sqlite3
+db = sqlite3.connect("./ToDoApp/task.db")
+c = db.cursor()
+
+year = today[:4]
+month = today[5:7]
+day = today[8:]
+
+try:
+    result = c.execute("SELECT * from task WHERE userID = ? AND dueDate=?", (user, today))
+except sqlite3.OperationalError:
+    result = "error"
+end
+%>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>To Do App</title>
+	<link rel="stylesheet" href="/static/toDoAppCss.css" />
+	<link rel="stylesheet" href="/static/toDoRed.min.css" />
+	<link rel="stylesheet" href="/static/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+</head>
+
+<body>
+    	<div data-role="page" data-theme="a">
+		<div data-role="header" data-position="inline">
+		    <div data-role="popup" id="menu">
+                <ul data-role="listview" data-inset="true">
+		            <li><a href="createTask" class="ui-btn">Create a New Task</a></li>
+		            <li><a href="deleteTask" class="ui-btn">Delete a Task</a></li>
+		            <li><a href="editTask" class="ui-btn">Edit a Task</a></li>
+		            <li><a href="calendar" class="ui-btn">Calendar</a></li>
+		            <li><a href="logout" class="ui-btn">Logout</a></li>
+	    	    </ul>
+            </div>
+		    <a href="#menu" data-rel="popup" data-icon="grid" data-iconpos="notext"></a>
+			<h1>To Do App</h1>
+		</div>
+
+		<div>
+			<h2 id="date" style="border-bottom: 2px solid black;padding-left: .5em"></h2>
+		</div>
+
+		<div id="dailyTasks">
+		    <form id="toDoList" action="/updateCompletionStatus" method='post' data-ajax="false">
+		        <fieldset data-role="controlgroup">
+		            %for task in result:
+		                %if task[4] == 1:
+		                    <label><input name="task" value={{task[0]}} type="checkbox" data-inline="true" disabled="disabled" checked="checked">{{task[3]}} ({{task[2]}})</label>
+		                %end
+
+		                %if task[4] == 0:
+		                    <label><input name="task" value={{task[0]}} type="checkbox" data-inline="true">{{task[3]}} ({{task[2]}})</label>
+		                %end
+		            %end
+		        </fieldset>
+		        <button class="ui-btn ui-corner-all" type="submit">Submit</button>
+		    </form>
+		</div>
+	</div>
+
+ 	<script type="text/javascript">
+         function currentDate() {
+             var d = new Date();
+             d.setFullYear({{year}})
+             d.setMonth({{month}})
+             d.setDate({{day}})
+
+             var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+             var textMonth = months[d.getMonth()-1];
+             var day = d.getDate();
+             var year = d.getFullYear();
+             document.getElementById("date").innerHTML = textMonth + " " + day + ", " + year;
+         }
+         window.onload = currentDate();
+    </script>
+</body>
+</html>

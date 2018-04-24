@@ -1,0 +1,50 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>To Do App</title>
+	<link rel="stylesheet" href="/static/toDoRed.min.css" />
+	<link rel="stylesheet" href="/static/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+</head>
+
+<body>
+	<div data-role="page" data-theme="a">
+		<div data-role="header" data-position="inline">
+			<h1>To Do App</h1>
+		</div>
+
+		<div class="ui-content">
+		    <h2 style="text-align: center">Login</h2>
+
+		    <form id="loginForm" action="/validateLogin" method='post'data-ajax="false">
+		        <fieldset data-role="fieldcontain" class="ui-hide-label">
+		            <label for="name">Name:</label>
+		            <input type="text" name="name" placeholder="Name" value=""/>
+		        </fieldset>
+
+		        <fieldset data-role="fieldcontain" class="ui-hide-label">
+		            <label for="password">Password:</label>
+		            <input type="password" name="password" placeholder="Password" value=""/>
+		        </fieldset>
+
+		        <button class="ui-btn ui-corner-all" type="submit">Submit</button>
+		    </form>
+
+		    <a href="/newUser" class="ui-btn" style="align: center; text-align: center">Create Account</a>
+		</div>
+	</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+

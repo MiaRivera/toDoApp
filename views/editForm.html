@@ -1,0 +1,68 @@
+<%
+import sqlite3
+list = c.execute("SELECT * FROM task WHERE ID = ?", (taskID,))
+%>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>To Do App</title>
+	<link rel="stylesheet" href="/static/toDoAppCss.css" />
+	<link rel="stylesheet" href="/static/toDoRed.min.css" />
+	<link rel="stylesheet" href="/static/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+</head>
+
+<body>
+	<div data-role="page" data-theme="a">
+		<div data-role="header" data-position="inline">
+		    <div data-role="popup" id="editTaskPageMenu">
+		        <ul data-role="listview" data-inset="true">
+		            <li><a href="/home" class="ui-btn" data-ajax="false">Home</a></li>
+		            <li><a href="createTask" class="ui-btn">Create a Task</a></li>
+		            <li><a href="deleteTask" class="ui-btn">Delete a Task</a></li>
+		            <li><a href="calendar" class="ui-btn">Calendar</a></li>
+		            <li><a href="logout" class="ui-btn">Logout</a></li>
+		        </ul>
+		    </div>
+		    <a href="#editTaskPageMenu" data-rel="popup" data-icon="grid" data-iconpos="notext"></a>
+			<h1>To Do App</h1>
+		</div>
+
+        <div>
+			<h2 id="date" style="border-bottom: 2px solid black;padding-left: .5em">Edit Task</h2>
+		</div>
+
+		<div>
+		    <form id="newTaskInfo" action="/edited" method='post' data-ajax="false">
+		        %for task in list:
+		        <input name="id" type="hidden" value="{{task[0]}}" />
+                <label>Title: </label>
+                <input name="title" type="text" value="{{task[3]}}" />
+
+                <label>Due Date: </label>
+                <input name="dueDate" type="date" value={{task[2]}} />
+
+                <label>Completed? </label>
+                <select name="status" data-role="slider">
+
+                    %if task[4] == 0:
+                        <option value=0 selected="selected">No</option>
+                        <option value=1>Yes</option>
+                    %end
+
+                    %if task[4] == 1:
+                        <option value=0>No</option>
+                        <option value=1 selected="selected">Yes</option>
+                    %end
+                </select>
+                %end
+                <button class="ui-btn ui-corner-all" type="submit" form="newTaskInfo">Submit</button>
+		    </form>
+		</div>
+	</div>
+</body>
+</html>
